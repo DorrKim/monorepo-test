@@ -9,6 +9,7 @@ export function Card({
   children: React.ReactNode;
   href: string;
 }): JSX.Element {
+  console.log('card')
   return (
     <a
       className={className}

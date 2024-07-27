@@ -32,7 +32,23 @@ jobs:
         with:
           node-version: 18
           cache: 'yarn'
- 
+
+      - name: Yarn 캐시 복원
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Node.js 의존성 캐시 복원
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: yarn
  
@@ -45,3 +61,15 @@ jobs:
         with:
           path: .turbo
           key: ${{ runner.os }}-turbo-${{ github.sha }}
+
+      - name: Yarn 캐시 저장
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Node.js 의존성 캐시 저장
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}

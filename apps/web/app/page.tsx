@@ -3,7 +3,7 @@ import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
 
 export default function Home() {
-  console.log('home')
+  console.log('home2')
   return (
     <div className={styles.page}>
       <main className={styles.main}>
